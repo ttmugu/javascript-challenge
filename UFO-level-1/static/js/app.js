@@ -7,7 +7,7 @@ var button =  d3.select("#filter-btn");
 button.on("click", function() {
     //initialized original data
     tableData = data;
-
+    //call function to read inputdata and check null, "" data
     var inputDate = readInput("datetime")
     var inputCity = readInput("city")
     var inputState = readInput("state")
@@ -15,6 +15,7 @@ button.on("click", function() {
     var inputShape = readInput("shape")
     //console.log(tableData)
   
+    //multy filter for every condition  by using filter function
     if(inputDate != null)
     {
         tableData = tableData.filter(fData => fData.datetime == inputDate);
@@ -40,16 +41,18 @@ button.on("click", function() {
         tableData = tableData.filter(fData => fData.shape == inputShape);
         console.log(tableData)
     };
-
-    clearTable();   
-
+    
+    //clear table for privious search result
+    clearTable();  
+    
+    //pupulate data
     pupulateTable(tableData);
 
 
 
 });
 
-//clear table if privious search result in the table
+//clear function table if privious search result in the table
 function clearTable(){
     var table = document.getElementById("ufo-table");
     for(var i = table.rows.length - 1; i > 0; i--)
@@ -58,6 +61,7 @@ function clearTable(){
     }
 }
 
+//pupulate in html table dynamically
 function pupulateTable(newData)
 {
     var tbody = d3.select("tbody");
@@ -94,7 +98,7 @@ function readInput(inputText)
         str = null;
     
     }
-    console.log(str)
+    //console.log(str)
     return str;
     
 };
